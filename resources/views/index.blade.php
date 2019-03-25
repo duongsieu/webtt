@@ -78,8 +78,8 @@
                 <h3><a href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
                 <p>{!!$sp->description!!}</p>
                 <div class="box">
-                  <p><span>{{$sp->price}}</span>&#8363;</p>
-                  <span class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                  <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
+                  <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                 </div>
               </div>
             </div>

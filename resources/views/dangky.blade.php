@@ -34,13 +34,18 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      .wrap-login100{
+        padding-top: 100px;
+      }
+    </style>
   </head>
   <body>
     @include ('header');
 
 
          <div class="wrap-login100">
-          <div class="login100-pic js-tilt" data-tilt>
+          <div class="login100-pic js-tilt" style="padding-top: 50px" data-tilt>
         <img src="StyleLogin/images/img-01.png" alt="IMG">
       </div>
 
@@ -56,6 +61,7 @@
         {{session('thongbao')}}
       </div>
       @endif
+      <div>
       <form action="dangky" class="login100-form validate-form" method="POST">
         <input type="hidden" name="_token" value="{{csrf_token()}}" />
         <span class="login100-form-title">
@@ -83,6 +89,7 @@
         </div>
 
       </form>
+      </div>
     </div>
     <script src="StyleAdmin/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->

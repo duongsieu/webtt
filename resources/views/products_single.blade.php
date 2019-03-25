@@ -50,11 +50,10 @@
           <h2 class="myh2">Chi tiết sản phẩm</h2>
           <div class="row">
             <div >
-                  <img style="width: 555px;
-    height: 300px;
-    margin-left: 277px;" src="upload/{{$sanpham->img}}" alt="image" >
-                </div>
-
+              <img style="width: 555px;
+              height: 300px;
+              margin-left: 277px;" src="upload/{{$sanpham->img}}" alt="image" >
+            </div>
             <div class="wrap-table100">
               <h1 style="font-size: 30px;  color: #ff9700;   text-align: center;   padding-top: 48px;    padding-bottom: 30px;">Thông số kỹ thuật</h1>
               <div class="table100 ver1 m-b-110">
@@ -98,28 +97,26 @@
                         <th class="cell100 column9">Công suất tối đa</th>
                         <td class="cell100 column1">{{$ctsp->congsuattoida}}</td>
                       </tr>
-                     <tr class="row100 head">
+                      <tr class="row100 head">
                         <th class="cell100 column9">Gía sản phẩm</th>
-                        <td class="cell100 column1">{{$ctsp->sanpham->price}}</td>
+                        <td class="cell100 column1">{{number_format($ctsp->sanpham->price)}}</td>
                       </tr>
-
-                    @endforeach
-                  </thead>
-                </table>
-              </div>
-            </div>
-          </div>
-          </div>
-          <!-- main slider carousel -->
-           <div class="row myrow">
-
-              <div class="col-sm-12">
-                <div class="cart" data-aos="fade-up" data-aos-duration="1500">
-                  <a href="#" class="btn btn-info" role="button">ADD TO CART</a>
-                 {{--  <a href="#" class="btn btn-primary" role="button">BUY NOW</a> --}}
+                      @endforeach
+                    </thead>
+                  </table>
                 </div>
               </div>
             </div>
+          </div>
+          <!-- main slider carousel -->
+          <div class="row myrow">
+            <div class="col-sm-12">
+              <div class="cart" data-aos="fade-up" data-aos-duration="1500">
+                <a href="muahang/{{$sanpham->id}}" class="btn btn-info" role="button">ADD TO CART</a>
+                {{--  <a href="#" class="btn btn-primary" role="button">BUY NOW</a> --}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -155,18 +152,17 @@
             </fieldset>
           </form>
         </div>
-  <h2>Reviews</h2>
-            <div class="myreview"  data-aos="fade-up">
-            @foreach($sanpham -> binhluan as $bl)
-              <div class="review-content">
-                <h6>{{Auth::user()->name}}
-
-                </h6>
-                <p>{{$bl->noidung}}</p>
-              </div>
-                    @endforeach
-            </div>
-  @endif
+        <h2>Reviews</h2>
+        <div class="myreview"  data-aos="fade-up">
+          @foreach($sanpham -> binhluan as $bl)
+          <div class="review-content">
+            <h6><p>trả lời bởi</p>{{Auth::user()->name}}
+            </h6>
+            <p>{{$bl->noidung}}</p>
+          </div>
+          @endforeach
+        </div>
+        @endif
       </div>
     </div>
   </section>
@@ -176,7 +172,7 @@
     <div class="container">
       <h2>Featured Products</h2>
       <div class="row">
-      @foreach($sanphamcungloai as $spcl)
+        @foreach($sanphamcungloai as $spcl)
         <div class="col-sm-6 col-md-3 col" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="1200">
           <div class="thumbnail">
             <figure class="image one">
@@ -186,7 +182,7 @@
               <h3><a href="product_single">{{$spcl->name}}</a></h3>
               <p>{{$spcl->description}}</p>
               <div class="box">
-               <p> {{$spcl->price}}</p>
+                <p> {{$spcl->price}}</p>
                 <span class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
               </div>
             </div>

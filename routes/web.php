@@ -14,9 +14,7 @@
 Route::get('/', function () {
 	return view('welcome');
 });
-Route::get('blog', function () {
-	return view('blog');
-});
+Route::get('blog', 'IndexController@gettt');
 
 Route::get('careers', function () {
 	return view('careers');
@@ -29,12 +27,8 @@ Route::group(['prefix' => 'lienhe'], function () {
 	Route::post('them', 'LienheController@postthem');
 });
 
-Route::get('shop', function () {
-	return view('shop');
-});
-Route::get('services', function () {
-	return view('services');
-});
+Route::get('shop', 'IndexController@getshop');
+Route::get('dichvu', 'IndexController@getdv');
 // Route::get('lienket', function () {
 // 	$data = App\sanpham::find(1)->theloai->toArray();
 // 	var_dump($data);
@@ -52,6 +46,10 @@ Route::get('blog_single/{id}', 'tintucController@gettintuc');
 
 Route::get('product_single/{id}', 'chitietsanphamController@getchitiet');
 Route::post('binhluan/{id}', 'binhluanController@postbinhluan');
+
+Route::get('muahang/{id}', 'IndexController@getAddtocart');
+Route::get('xoahang/{id}', 'IndexController@getDelcart');
+Route::get('dathang', 'IndexController@getdathang');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function () {
 	Route::group(['prefix' => 'theloai'], function () {

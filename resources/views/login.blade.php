@@ -51,13 +51,20 @@
         @endforeach
       </div>
       @endif
-      @if (session('thongbao'))
+
+
+      <form action="dangnhap" class="login100-form validate-form" method="POST">
+        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+         @if (session('Thongbao2'))
+      <div class="alert alert-danger">
+        {{session('Thongbao2')}}
+      </div>
+      @endif
+        @if (session('thongbao'))
       <div class="alert alert-danger">
         {{session('thongbao')}}
       </div>
       @endif
-      <form action="dangnhap" class="login100-form validate-form" method="POST">
-        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 
         <span class="login100-form-title">
           Member Login

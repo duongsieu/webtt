@@ -8,6 +8,7 @@ use App\tintuc;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class UserController extends Controller {
 
@@ -88,6 +89,7 @@ class UserController extends Controller {
 	}
 	public function getdangxuat() {
 		Auth::logout();
+		Session::forget('cart');
 		$sanpham = sanpham::where('noibat', 1)->get();
 		$dichvu = dichvu::all();
 		$tintuc = tintuc::orderBy('id', 'desc')->take(2)->get();

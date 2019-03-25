@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TheloaiController extends Controller {
+class HoadonController extends Controller {
 	//
 
 	public function getDanhsach() {
