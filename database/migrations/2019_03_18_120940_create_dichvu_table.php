@@ -17,7 +17,7 @@ class CreateDichvuTable extends Migration {
 			$table->string('tendv');
 			$table->string('tomtat');
 			$table->string('noidung');
-			$table->string('img');
+
 		});
 	}
 

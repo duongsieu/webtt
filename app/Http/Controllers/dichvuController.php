@@ -23,17 +23,6 @@ class dichvuController extends Controller {
 		$dichvu->tomtat = $request->tomtat;
 		$dichvu->noidung = $request->noidung;
 
-		if ($request->hasFile('img')) {
-			$file = $request->file('img');
-			$duoi = $file->getClientOriginalExtension();
-			if ($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg') {
-				return redirect('admin/dichvu/them')->with('Lỗi', 'Chỉ được chọn file có đuôi jpg, png, jpeg');
-			}
-			$name = $file->getClientOriginalName();
-			// $image = time().'_'.$name;
-			$file->move('upload', $name);
-			$dichvu->img = $name;
-		}
 		$dichvu->save();
 		return redirect('admin/dichvu/them')->with('thongbao', 'Thêm thành công');
 	}
@@ -48,18 +37,6 @@ class dichvuController extends Controller {
 		$dichvu->tendv = $request->tendv;
 		$dichvu->tomtat = $request->tomtat;
 		$dichvu->noidung = $request->noidung;
-
-		if ($request->hasFile('img')) {
-			$file = $request->file('img');
-			$duoi = $file->getClientOriginalExtension();
-			if ($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg') {
-				return redirect('admin/dichvu/sua')->with('Lỗi', 'Chỉ được chọn file có đuôi jpg, png, jpeg');
-			}
-			$name = $file->getClientOriginalName();
-			// $image = time().'_'.$name;
-			$file->move('upload', $name);
-			$dichvu->img = $name;
-		}
 		$dichvu->save();
 		return redirect('admin/dichvu/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}

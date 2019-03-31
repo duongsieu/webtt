@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\chitietsanpham;
+use App\images;
 use App\sanpham;
 use App\theloai;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class SanphamController extends Controller {
 	//
 
 	public function getDanhsach() {
-		$sanpham = sanpham::all();
+		$sanpham = sanpham::paginate(5);
 		return view('admin.sanpham.danhsach', ['sanpham' => $sanpham]);
 	}
 
@@ -39,27 +40,18 @@ class SanphamController extends Controller {
 				'amount.required' => 'Bạn chưa chọn thể loại',
 				'description' => 'Bạn chưa chọn thể loại',
 			]);
+		///
 		$sanpham = new sanpham;
 		$sanpham->name = $request->name;
 		$sanpham->price = $request->price;
 		$sanpham->amount = $request->amount;
 
-		if ($request->hasFile('img')) {
-			$file = $request->file('img');
-			$duoi = $file->getClientOriginalExtension();
-			if ($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg') {
-				return redirect('admin/sanpham/them')->with('Lỗi', 'Chỉ được chọn file có đuôi jpg, png, jpeg');
-			}
-			$name = $file->getClientOriginalName();
-			// $image = time().'_'.$name;
-			$file->move('upload', $name);
-			$sanpham->img = $name;
-		}
 		$sanpham->description = $request->description;
 		$sanpham->id_type = $request->TheLoai;
 		$sanpham->noibat = $request->noibat;
 
 		$sanpham->save();
+		///
 		$chitietsanpham = new chitietsanpham;
 		$chitietsanpham->khoiluong = $request->khoiluong;
 		$chitietsanpham->kichthuoc = $request->kichthuoc;
@@ -71,6 +63,8 @@ class SanphamController extends Controller {
 		$chitietsanpham->congsuattoida = $request->congsuattoida;
 		$chitietsanpham->id_sanpham = $sanpham->id;
 		$chitietsanpham->save();
+		$image = new images;
+		$image->id_sanpham = $sanpham->id;
 
 		return redirect('admin/sanpham/them')->with('thongbao', 'Thêm thành công');
 	}
@@ -104,19 +98,6 @@ class SanphamController extends Controller {
 		$sanpham->name = $request->name;
 		$sanpham->price = $request->price;
 		$sanpham->amount = $request->amount;
-
-		if ($request->hasFile('img')) {
-			$file = $request->file('img');
-			$duoi = $file->getClientOriginalExtension();
-			if ($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg') {
-				return redirect('admin/sanpham/sua/' . $id)->with('Lỗi', 'Chỉ được chọn file có đuôi jpg, png, jpeg');
-			}
-			$name = $file->getClientOriginalName();
-			$image = time() . '_' . $name;
-			$file->move('upload', $image);
-			unlink(public_path('/upload' . $sanpham->image));
-			$sanpham->img = $image;
-		}
 		$sanpham->description = $request->description;
 		$sanpham->id_type = $request->TheLoai;
 		$sanpham->noibat = $request->noibat;

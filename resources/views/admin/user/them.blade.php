@@ -33,6 +33,10 @@
                         <label>Role</label>
                         <input class="form-control" name="role" placeholder="" />
                     </div>
+                     <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" name="diachi" placeholder="" />
+                    </div>
                     <button type="submit" class="btn btn-default">Thêm</button>
                     {{-- <button type="reset" class="btn btn-default">Reset</button> --}}
                     <form>

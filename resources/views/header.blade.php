@@ -1,7 +1,7 @@
 <header class="header">
   <style>
   .sub-menu{
-  display: block;
+  display: inline-block;
   width: 200%;
   height: auto;
   position: absolute;
@@ -48,7 +48,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index">shop<span></span></a>
+        <a class="navbar-brand" href="index">shop<span>moto</span></a>
       </div>
       <!-- Collect the nav links and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -57,59 +57,59 @@
           <li class="has-sub-menu"><a href="shop">Sản phẩm </a>
           <ul class="sub-menu">
             <li  class="sub-menu-item">1aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa</li>
-            <li  class="sub-menu-item">2</li>
-            <li  class="sub-menu-item">3</li>
-            <li  class="sub-menu-item">4</li>
-            <li  class="sub-menu-item">5</li>
-          </ul></li>
-          <li><a href="dichvu">Dịch vụ </a></li>
-          <li><a href="blog">Tin tức </a></li>
-          <li><a href="contact">Liên hệ </a></li>
-          @if(Auth::check())
-          <li><a href="">{{Auth::user()->name}}</a></li>
-          <li><a href="dangxuat">Đăng xuất</a></li>
-          @else
-          <li><a href="dangnhap">Đăng nhập</a></li>
-          @endif
-          <li class="has-sub-menu no-hove" > <a  ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span style="margin-left: 5px;">Giỏ hàng(@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trống @endif)</span></a>
-          @if(Session::has('cart'))
-
-          <ul id="mydrop" class="sub-menu cart-menu">
-
-            @foreach($sanpham_cart as $sp)
-            <li class="sub-menu-item">
-              <a href=""><img width="50px" height="50px" src="upload/{{$sp['item']['img']}}" alt=""></a>
-              <span>{{$sp['item']['name']}}</span><br>
-              <span>{{$sp['qty']}}*<span>{{number_format($sp['item']['price'])}}</span></span>
-              <a href ="xoahang/{{$sp['item']['id']}}">Xóa</a>
-            </li>
-            @endforeach
-            <span>Tổng tiền: {{number_format( Session('cart')->totalPrice)}}</span>
-           <a href="dathang">Đặt hàng</a>
           </ul>
-          @endif
         </li>
-      </ul>
-      </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-->
-    </nav>
-    <!-- nav End-->
-    {{--   <script>
-    function myFunction() {
-    document.getElementById("mydrop").classList.toggle("show");
-    }
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("sub-menu cart-menu");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-    openDropdown.classList.remove('show');
-    }
-    }
-    }
-    }
-    </script> --}}
-  </header>
+        <li><a href="dichvu">Dịch vụ </a></li>
+        <li><a href="blog">Tin tức </a></li>
+        <li><a href="contact">Liên hệ </a></li>
+        @if(Auth::check())
+        <li><a href="">{{Auth::user()->name}}</a></li>
+        <li><a href="dangxuat">Đăng xuất</a></li>
+        @else
+        <li><a href="dangnhap">Đăng nhập</a></li>
+        @endif
+        <li class="has-sub-menu no-hove" > <a  ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span style="margin-left: 5px;">Giỏ hàng(@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trống @endif)</span></a>
+        @if(Session::has('cart'))
+        <ul id="mydrop" class="sub-menu cart-menu">
+
+          @foreach($sanpham_cart as $sp)
+          <li class="sub-menu-item">
+           @foreach($images as $img)
+          @if($img->id_sanpham == $sp['item']['id'] && $img->chude == '1' && $sp['item']['id_type'] = '1' )
+            <a href=""><img width="50px" height="50px" src="upload/{{$img->img}}" alt=""></a>
+            @endif
+            @endforeach
+            <span>{{$sp['item']['name']}}</span>&#124;
+            <span>{{$sp['qty']}}*<span>{{number_format($sp['item']['price'])}}</span></span>
+            <a href ="xoahang/{{$sp['item']['id']}}">Xóa</a>
+          </li>
+          @endforeach
+          <span>Tổng tiền: {{number_format( Session('cart')->totalPrice)}}</span>&#124;&#124;
+          <a href="dathang">Đặt hàng</a>
+        </ul>
+        @endif
+      </li>
+    </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-->
+  </nav>
+  <!-- nav End-->
+  {{--   <script>
+  function myFunction() {
+  document.getElementById("mydrop").classList.toggle("show");
+  }
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+  var dropdowns = document.getElementsByClassName("sub-menu cart-menu");
+  var i;
+  for (i = 0; i < dropdowns.length; i++) {
+  var openDropdown = dropdowns[i];
+  if (openDropdown.classList.contains('show')) {
+  openDropdown.classList.remove('show');
+  }
+  }
+  }
+  }
+  </script> --}}
+</header>

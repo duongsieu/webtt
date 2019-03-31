@@ -10,7 +10,7 @@ class hoadon extends Model {
 	public function chitiethoadon() {
 		return $this->hasMany('App\chitiethoadon', 'id_bill', 'id');
 	}
-	public function User() {
-		$this->belongsTo('App\User', 'id_user', 'id');
+	public function user() {
+		return $this->belongsTo('App\User', 'id_user', 'id');
 	}
 }

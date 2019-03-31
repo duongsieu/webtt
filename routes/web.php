@@ -50,6 +50,11 @@ Route::post('binhluan/{id}', 'binhluanController@postbinhluan');
 Route::get('muahang/{id}', 'IndexController@getAddtocart');
 Route::get('xoahang/{id}', 'IndexController@getDelcart');
 Route::get('dathang', 'IndexController@getdathang');
+Route::post('dathang', 'IndexController@postdathang');
+
+Route::group(['prefix' => 'ajax'], function () {
+	Route::get('sanpham/{idtheloai}', 'AjaxController@getsanpham');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function () {
 	Route::group(['prefix' => 'theloai'], function () {
@@ -82,6 +87,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function 
 		Route::get('danhsach/{id}', 'chitietsanphamController@getDanhsach');
 
 	});
+	Route::group(['prefix' => 'chitiethoadon'], function () {
+		//admin/chitietsanpham/....
+		Route::get('danhsach/{id}', 'HoadonController@getDanhsachchitiet');
+
+	});
 
 	Route::group(['prefix' => 'user'], function () {
 		//admin/user/....
@@ -99,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function 
 	Route::group(['prefix' => 'hoadon'], function () {
 		//admin/sanpham/....
 		Route::get('danhsach', 'HoadonController@getDanhsach');
+
 		Route::get('sua', 'HoadonController@getSua');
 		Route::get('them', 'HoadonController@getthem');
 	});
@@ -126,6 +137,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function 
 		Route::post('them', 'dichvuController@postthem');
 
 		Route::get('xoa/{id}', 'dichvuController@getXoa');
+	});
+	Route::group(['prefix' => 'images'], function () {
+		Route::get('danhsach', 'imagesController@index');
+
+		Route::get('sua/{id}', 'imagesController@show');
+		Route::post('sua/{id}', 'imagesController@update');
+
+		Route::get('them', function () {
+			return view('admin.images.them');
+		});
+		Route::post('them', 'imagesController@create');
+
+		Route::get('xoa/{id}', 'imagesController@destroy');
 	});
 
 });

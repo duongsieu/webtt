@@ -41,11 +41,7 @@
                         {{$dichvu->noidung}}
                         </textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <img width="50px" height="40px" src="upload/{{$dichvu->img}}" alt="">
-                        <input type="file" name="img" class="form-control"  />
-                    </div>
+
 
                     <button type="submit" class="btn btn-default">Sửa</button>
                     {{--    <button type="reset" class="btn btn-default">Reset</button> --}}

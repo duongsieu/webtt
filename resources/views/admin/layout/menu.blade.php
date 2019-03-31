@@ -36,6 +36,18 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+              <li>
+                <a href="#"><i class="fa fa-cube fa-fw"></i> Hình ảnh<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/images/danhsach">Danh sách</a>
+                    </li>
+                    <li>
+                        <a href="admin/images/them">Thêm</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
             <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> Hóa đơn<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

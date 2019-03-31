@@ -15,11 +15,11 @@ class CreateSanphamTable extends Migration {
 			$table->bigIncrements('id');
 			$table->timestamps();
 			$table->string('name');
-			$table->float('price', 8, 2);
+			$table->float('price', 225, 2);
 			$table->integer('amount');
-			$table->string('img');
 			$table->string('description');
 			$table->bigInteger('id_type');
+			$table->integer('noibat')->default(0);
 		});
 	}
 

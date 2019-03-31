@@ -17,7 +17,7 @@ class CreateTintucTable extends Migration {
 			$table->string('tieude');
 			$table->string('tomtat');
 			$table->string('noidung');
-			$table->string('img');
+
 		});
 	}
 

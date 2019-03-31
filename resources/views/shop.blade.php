@@ -24,7 +24,54 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>.container {padding-right: 20px;padding-left: 20px;}</style>
+    <style>
+
+/*==Style cho menu===*/
+#menu ul {
+  background:#fff;
+  list-style-type: none;
+  text-align: center;
+height: 50px;
+}
+#menu li {
+  color: #f2f2f2;
+  background: #f2f2f2;
+  margin-right: 10px;
+  display: inline-block;
+  width: 120px;
+  height: 60px;
+  line-height: 55px;
+  margin-left: -5px;
+  text-align: center;
+
+}
+#menu a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  font-weight: bold;
+  height: 60px;
+  font-size: 15px;
+
+pointer-events: none;
+cursor: default;
+
+}
+#menu a:hover {
+background: #fff;
+
+}
+.tieude{
+  font-size: 40px;
+  color: #f97000;
+  text-align: center;
+  font-weight: normal !important;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 0;
+}
+
+  </style>
   </head>
   <!-- Body Start-->
   <body>
@@ -43,42 +90,34 @@
     <!-- Product Section Start -->
     <section id="product">
       <div class="container">
+        <p class="tieude">Lựa chọn phong cách riêng cho bạn</p>
+        <div id="menu">
+  <ul>
+        <li><a href="#">Tất cả</a></li>
+  @foreach($theloai as $tl)
+    <li  id="{{$tl->id}}"><a href="#">{{$tl->name}}
+      </a></li>
+    @endforeach
+  </ul>
+</div>
         <div class="inner-content">
-          <h2>Featured Products</h2>
-          <div class="row" data-aos="fade-up" data-aos-duration="500">
-            @foreach($sanpham as $spnb)
-            <div class="col-sm-6 col-md-3 col">
-              <div class="thumbnail">
-                <figure class="image one">
-                  <a href="product_single/{{$spnb->id}}"><img src="upload/{{$spnb->img}}" class="img-responsive" alt="Responsive image"></a>
-                </figure>
-                <div class="caption">
-                  <h3><a href="product_single/{{$spnb->id}}">{{$spnb->name}}</a></h3>
-                  <p>{{$spnb->description}} </p>
-                  <div class="box">
-                    <p><span>$ 23 </span> Only</p>
-                    <span class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endforeach
-            <!-- col End -->
-          </div>
           <!-- 1st Row End -->
-          <h2 style="padding-top: 40px;">Latest Products</h2>
           <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
-            @foreach($sanphama as $sp)
+            @foreach($sanpham as $sp)
             <div class="col-sm-6 col-md-3 col">
-              <div class="thumbnail">
+              <div class="thumbnail" id="sanpham">
                 <figure class="image one">
-                  <a href="product_single/{{$sp->id}}"><img src="upload/{{$sp->img}}" class="img-responsive" alt="Responsive image"></a>
+                @foreach($images as $img)
+                  @if($img->id_sanpham == $sp->id && $img->chude == 1 )
+                  <a href="product_single/{{$sp->id}}"><img src="upload/{{$img->img}}" class="img-responsive" alt="Responsive image"></a>
+                    @endif
+                  @endforeach
                 </figure>
                 <div class="caption">
                   <h3><a href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
-                  <p>{{$sp->description}}</p>
+                  {{-- <p>{!!$sp->description!!}</p> --}}
                   <div class="box">
-                    <p><span>$ 23 </span> Only</p>
+                    <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
                     <span class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
                   </div>
                 </div>
@@ -106,5 +145,16 @@
     <script src="Style/js/bootstrap.min.js"></script>
     <script src="Style/js/custom.js"></script>
   </body>
+  <script>
+    $(document).ready(function(){
+      $("li").change(function() {
+           var idtheloai = this.id;
+          $.get("ajax/sanpham"+idtheloai,function(data){
+            alert($data);
+            //$("#sanpham").html(data);
+          });
+      });
+    });
+  </script>
   <!-- Body Ended -->
 </html>

@@ -1,6 +1,11 @@
 @extends('admin.layout.index')
 @section('content')
 <!-- Page Content -->
+<style>
+    .pagination{
+        margin-left: 350px;
+    }
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -22,7 +27,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Gía</th>
                         <th>Số lượng</th>
-                        <th>Ảnh</th>
+
                         <th>Mô tả</th>
                         <th>Tên thể loại</th>
                         <th>Nổi bật</th>
@@ -38,7 +43,7 @@
                         <td>{{$sp->name}}</td>
                         <td>{{$sp->price}}</td>
                         <td>{{$sp->amount}}</td>
-                        <td> <img with="50px" height="40px" src="upload/{{$sp->img}}" ></td>
+
                         <td>{{$sp->description}}</td>
                         <td>{{$sp->theloai->name}}</td>
                         <td>{{$sp->noibat}}</td>
@@ -54,6 +59,7 @@
                     @endforeach
                 </tbody>
             </table>
+          {!!$sanpham->links()!!}
         </div>
         <!-- /.row -->
     </div>

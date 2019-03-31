@@ -42,6 +42,9 @@
     	.input-form{
 		float: right;
 		margin-right: 100px;
+        text-align: center;
+        font-size: 18px;
+        font-family: auto;
 			border-radius: 20px;
 			height: 50px;
 			width: 257px;
@@ -49,6 +52,9 @@
     	.tuandeptrai{
     		margin-top: 30px;
     	}
+        .Bill_card-donhang_right{
+            display: inline;
+        }
 
 
 
@@ -61,11 +67,12 @@
  <div class="banner">
       <div class="container">
         <div>
-          <h1>Our Services</h1>
+          <h1>Đặt hàng</h1>
         </div>
       </div>
     </div>
-    <form action="">
+    <form action="dathang" method="POST" style="background: #cccccc">
+    	<input type="hidden" name="_token" value="{{csrf_token()}}" />
       <div class="container">
 	<div class="row">
 		<h2 class="tuandeptrai">Thông tin cá nhân</h2>
@@ -74,21 +81,21 @@
 	<div class="col-md-6" >
 		<div class="Bill_form-block">
 			<label class="lable-form">Tên:</label>
-			<input class="input-form" type="text" name="" placeholder="Ten">
+			<input class="input-form" type="text" name="name" placeholder="Ten" value="{{Auth::user()->name}}">
 		</div>
 		<div class="Bill_form-block">
 			<label class="lable-form">Số điện thoại:</label>
-			<input class="input-form" type="text" name="" placeholder="Số điện thoại">
+			<input class="input-form" type="text" name="sdt" placeholder="Số điện thoại" value="{{Auth::user()->sdt}}">
 		</div>
 		<div class="Bill_form-block">
 			<label class="lable-form">Email:</label>
-			<input class="input-form" type="text" name="" placeholder="Email">
+			<input class="input-form" type="text" name="email" placeholder="Email" value="{{Auth::user()->email}}">
 		</div>
 		<div class="Bill_form-block"><label class="lable-form">Địa chỉ:</label>
-			<input class="input-form" type="text" name="" placeholder="Địa Chỉ"></div>
+			<input class="input-form" type="text" name="diachi" placeholder="Địa Chỉ" value="{{Auth::user()->diachi}}"></div>
 		<div class="Bill_form-block">
 			<label class="lable-form">Ghi chú:</label>
-			<input class="input-form" type="text" name="" placeholder="Ghi chú">
+			<input class="input-form" type="text" name="note" placeholder="Ghi chú">
 		</div>
 
 	</div>
@@ -96,22 +103,39 @@
 		<div class="card">
                     <div class="card-header"> <h4> Đơn hàng của bạn </h4> </div>
                     <ul class="list-group list-group-flush">
+                    	@if(Session::has('cart'))
                        @foreach($sanpham_cart as $sp)
-                        <li class="list-group-item">
-                            <div class="Bill_card-donhang_right" >
+                        <li class="list-group-item item">
+                            <div class="Bill_card-donhang" >
+                                @foreach($images as $img)
+          @if($img->id_sanpham == $sp['item']['id'] && $img->chude == '1' && $sp['item']['id_type'] = '1' )
+            <img width="50px" height="50px" src="upload/{{$img->img}}" alt="">
+            @endif
+            @endforeach
+
                                 <p class="text-danger text-capitalize"> {{$sp['item']['name']}} </p>
-                                <span> <b> Price: </b>gia đ </span>
-                                <span> <b> SL</p> </span>
+                                <span> <b> Đơn gía: </b>{{number_format($sp['item']['price'])}}</span><br>
+                                <span> <b> SL: </b>{{$sp['qty']}}</span>
                             </div>
                         </li>
                     @endforeach
-
-                        <li class="list-group-item">
+                     <li class="list-group-item">
                             <div class="d-flex flex-row ">
-                                <h4 class="pr-3"> Tổng tiền: </h4> <h4>{{Session('cart')->totalPrice}}</h4>
+                                <h4 class="pr-3"> Hình thức thanh toán</h4>
+                                <h4>Giao tiền khi nhận hàng</h4>
                             </div>
 
                         </li>
+                        <li class="list-group-item">
+                            <div class="d-flex flex-row ">
+                                <h4 class="pr-3"> Tổng tiền:</h4> <h4>{{number_format(Session('cart')->totalPrice)}}</h4>
+                            </div>
+
+                        </li>
+    @endif
+                        <button type="submit">Đặt Hàng</button>
+
+
 
                     </ul>
 

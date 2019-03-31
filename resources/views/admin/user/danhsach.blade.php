@@ -19,6 +19,7 @@
                         <th>Sdt</th>
                         <th>Password</th>
                         <th>Role</th>
+                        <th>Địa chỉ</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -32,6 +33,7 @@
                         <td>{{$u->sdt}}</td>
                         <td>{{$u->password}}</td>
                         <td>{{$u->role}}</td>
+                        <td>{{$u->diachi}}</td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/user/xoa/{{$u->id}}"> Delete</a></td>
                         <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/user/sua/{{$u->id}}">Edit</a></td>
                     </tr>

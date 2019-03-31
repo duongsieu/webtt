@@ -19,6 +19,7 @@ class CreateHoadonTable extends Migration {
 			$table->integer('tonghoadon');
 			$table->string('note');
 			$table->string('status');
+			$table->string('hinhthuocthanhtoan')->default('Tiền mặt');
 		});
 	}
 

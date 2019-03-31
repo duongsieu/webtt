@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\cart;
+use App\chitiethoadon;
 use App\dichvu;
+use App\hoadon;
+use App\images;
 use App\sanpham;
+use App\theloai;
 use App\tintuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Mail;
 use Session;
 
 class IndexController extends Controller {
@@ -26,20 +32,60 @@ class IndexController extends Controller {
 		$sanpham = sanpham::where('noibat', 1)->get();
 		$dichvu = dichvu::all();
 		$tintuc = tintuc::orderBy('id', 'desc')->take(2)->get();
+		$images = images::all();
 
-		return view('index', ['sanpham' => $sanpham, 'dichvu' => $dichvu, 'tintuc' => $tintuc]);
+		return view('index', ['sanpham' => $sanpham, 'dichvu' => $dichvu, 'tintuc' => $tintuc, 'images' => $images]);
 	}
 	public function getdathang() {
+		if (Session::has('cart')) {
 
-		$oldcart = Session::has('cart') ? Session::get('cart') : null;
-		$cart = new cart($oldcart);
+			$oldcart = Session::has('cart') ? Session::get('cart') : null;
+			$cart = new cart($oldcart);
+			$cart = Session::get('cart');
+			$images = images::all();
+			$sanpham_cart = $cart->items;
+			$totalQty = $cart->totalQty;
+			$totalPrice = $cart->totalPrice;
+
+			return view('dathang', ['sanpham_cart' => $sanpham_cart, 'totalQty' => $totalQty, 'totalPrice' => $totalPrice, 'images' => $images]);
+		}
+	}
+	public function postdathang(Request $request) {
 		$cart = Session::get('cart');
+		$bill = new hoadon;
+		$bill->id_user = Auth::user()->id;
+		$bill->ngay = date('Y-m-d');
+		$bill->tonghoadon = $cart->totalPrice;
+		$bill->note = $request->note;
+		$bill->status = 'Chưa giao hàng';
+		$bill->save();
 
-		$sanpham_cart = $cart->items;
-		$totalQty = $cart->totalQty;
-		$totalPrice = $cart->totalPrice;
+		foreach ($cart->items as $key => $value) {
+			# code...
+			$bill_detail = new chitiethoadon;
+			$bill_detail->id_bill = $bill->id;
+			$bill_detail->unit_price = ($value['price'] / $value['qty']);
+			$bill_detail->soluong = $value['qty'];
+			$bill_detail->id_product = $key;
+			$bill_detail->save();
+		}
+		// $sanpham_cart = $cart->items;
+		// $tensp = $sanpham_cart['name'];
+		// dd($tensp);
+		//	dd($request->email);
+		$data = ['hoten' => $request->name,
+			'diachi' => $request->diachi,
 
-		return view('dathang', ['sanpham_cart' => $sanpham_cart, 'totalQty' => $totalQty, 'totalPrice' => $totalPrice]);
+			'tonghoadon' => $cart->totalPrice,
+		];
+
+		Mail::send('mail', $data, function ($msg) {
+
+			$msg->from('shopmoto224@gmail.com', 'ShopMoto');
+			$msg->to(Input::get('email'), 'Dương Siêu')->subject('ShopMoto đã nhận đơn hàng');
+		});
+		Session::forget('cart');
+		return view('chucmung');
 
 	}
 	public function getAddtocart(Request $request, $id) {
@@ -71,9 +117,10 @@ class IndexController extends Controller {
 
 	}
 	public function getshop() {
-		$sanpham = sanpham::where('noibat', 1)->get();
-		$sanphama = sanpham::orderBy('id', 'desc')->get();
-		return view('shop', ['sanpham' => $sanpham, 'sanphama' => $sanphama]);
+		$sanpham = sanpham::orderBy('id', 'desc')->get();
+		$images = images::all();
+		$theloai = theloai::all();
+		return view('shop', ['sanpham' => $sanpham, 'images' => $images, 'theloai' => $theloai]);
 	}
 	public function getdv() {
 		$dichvu = dichvu::all();

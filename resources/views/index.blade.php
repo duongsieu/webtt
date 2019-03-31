@@ -64,16 +64,20 @@
     <section class="product">
       <!-- Container -->
       <div class="container">
-        <h2>Featured Products <a class="btn btn-default" href="shop" role="button">shop more</a></h2>
+        <h2>Sản phẩm nổi bật <a class="btn btn-default" href="shop" role="button">shop more</a></h2>
         <!-- Row -->
         <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
           <!-- 1st col -->
           @foreach($sanpham as $sp)
           <div class="col-sm-6 col-md-3 col">
             <div class="thumbnail">
+              @foreach($images as $img)
+              @if($img->id_sanpham == $sp->id && $img->chude == '1' && $sp->id_type = '1' )
               <figure class="image one">
-                <a href="product_single/{{$sp->id}}"><img width="262.5px" height="166.48px" src="upload/{{$sp->img}}" class="img-responsive" alt="Responsive image"></a>
+                <a href="product_single/{{$sp->id}}"><img width="262.5px" height="166.48px" src="upload/{{$img->img}}" class="img-responsive" alt="Responsive image"></a>
               </figure>
+              @endif
+              @endforeach
               <div class="caption">
                 <h3><a href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
                 <p>{!!$sp->description!!}</p>
@@ -104,7 +108,11 @@
                 <h3><a href="blog_single/{{$tt->id}}">{{$tt->tieude}}</a></h3>
                 <p><span><a href="blog_single/{{$tt->id}}">read more...</a></span></p>
               </div>
-              <img src="upload/{{$tt->img}}" class="img-responsive" alt="post-1">
+              @foreach($images as $img)
+              @if($img->id_tintuc == $tt->id)
+              <img src="upload/{{$img->img}}" class="img-responsive" alt="post-1">
+              @endif
+              @endforeach
             </div>
           </div>
           @endforeach

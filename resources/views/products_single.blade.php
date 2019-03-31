@@ -11,15 +11,19 @@
     <title>Shop</title>
     <base href="{{asset('')}}">
     <!-- bootstrap -->
+
     <link href="Style/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS: custom Styles -->
     <link href="Style/css/animate.css" rel="stylesheet">
+
     <link href="Style/css/main.css" rel="stylesheet">
     <link href="Style/css/maintable.css" rel="stylesheet">
     <!-- Google Font and font-awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link href="https://fonts.googleapis.com/css?family=Exo+2:100,200,300,400,400i,500,600,700" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,7 +31,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style> .product h2, {font-size: 30px;color:
-    ;}.container {padding-right: 20px;padding-left: 20px;}.product {background-image: none;}</style>
+    ;}.container {padding-right: 20px;padding-left: 20px;}.product {background-image: none;}
+    .center{
+          max-width: 50%;
+           margin: auto;
+    }
+    .bx-wrapper{
+  max-width: 50% !important;
+  margin: auto ;
+
+
+    }
+  </style>
   </head>
   <!-- Body Start-->
   <body>
@@ -47,13 +62,19 @@
     <section class="single">
       <div class="container">
         <div class="inner-content">
-          <h2 class="myh2">Chi tiết sản phẩm</h2>
+          <h3 class="myh3">Chi tiết sản phẩm</h3>
+
+
           <div class="row">
-            <div >
-              <img style="width: 555px;
-              height: 300px;
-              margin-left: 277px;" src="upload/{{$sanpham->img}}" alt="image" >
-            </div>
+        <div class="slider">
+          @foreach($image as $img)
+    @if($img->id_sanpham == $sanpham->id)
+    <div ><img width="800px" height="300px"  src="upload/{{$img->img}}" alt=""></div>
+    @endif
+ @endforeach
+  </div>
+
+
             <div class="wrap-table100">
               <h1 style="font-size: 30px;  color: #ff9700;   text-align: center;   padding-top: 48px;    padding-bottom: 30px;">Thông số kỹ thuật</h1>
               <div class="table100 ver1 m-b-110">
@@ -61,46 +82,46 @@
                   <table >
                     <thead>
                       @foreach($chitietsanpham as $ctsp)
-                      <tr class="row100 head">
-                        <th class="cell100 column2">Tên sản phẩm</th>
-                        <td class="cell100 column1">{{$ctsp->sanpham->name}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column2">Khối lượng bản thân</th>
-                        <td class="cell100 column1">{{$ctsp->khoiluong}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column3">Dài x Rộng x Cao</th>
-                        <td class="cell100 column1">{{$ctsp->kichthuoc}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column4">Khoảng cách trục bánh xe</th>
-                        <td class="cell100 column1">{{$ctsp->trucbanhxe}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column5">Độ cao yên</th>
-                        <td class="cell100 column1">{{$ctsp->docaiyen}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column6">Khoảng sáng gầm xe</th>
-                        <td class="cell100 column1">{{$ctsp->sanggamxe}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column7">Dung tích bình xăng</th>
-                        <td class="cell100 column1">{{$ctsp->binhxang}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column8">Kích cở lốp trướ/sau</th>
-                        <td class="cell100 column1">{{$ctsp->lopxe}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column9">Công suất tối đa</th>
-                        <td class="cell100 column1">{{$ctsp->congsuattoida}}</td>
-                      </tr>
-                      <tr class="row100 head">
-                        <th class="cell100 column9">Gía sản phẩm</th>
-                        <td class="cell100 column1">{{number_format($ctsp->sanpham->price)}}</td>
-                      </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column2">Tên sản phẩm</th>
+                          <td class="cell100 column1">{{$ctsp->sanpham->name}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column2">Khối lượng bản thân</th>
+                          <td class="cell100 column1">{{$ctsp->khoiluong}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column3">Dài x Rộng x Cao</th>
+                          <td class="cell100 column1">{{$ctsp->kichthuoc}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column4">Khoảng cách trục bánh xe</th>
+                          <td class="cell100 column1">{{$ctsp->trucbanhxe}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column5">Độ cao yên</th>
+                          <td class="cell100 column1">{{$ctsp->docaiyen}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column6">Khoảng sáng gầm xe</th>
+                          <td class="cell100 column1">{{$ctsp->sanggamxe}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column7">Dung tích bình xăng</th>
+                          <td class="cell100 column1">{{$ctsp->binhxang}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column8">Kích cở lốp trướ/sau</th>
+                          <td class="cell100 column1">{{$ctsp->lopxe}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column9">Công suất tối đa</th>
+                          <td class="cell100 column1">{{$ctsp->congsuattoida}}</td>
+                        </tr>
+                        <tr class="row100 head">
+                          <th class="cell100 column9">Gía sản phẩm</th>
+                          <td class="cell100 column1">{{number_format($ctsp->sanpham->price)}}</td>
+                        </tr>
                       @endforeach
                     </thead>
                   </table>
@@ -113,7 +134,6 @@
             <div class="col-sm-12">
               <div class="cart" data-aos="fade-up" data-aos-duration="1500">
                 <a href="muahang/{{$sanpham->id}}" class="btn btn-info" role="button">ADD TO CART</a>
-                {{--  <a href="#" class="btn btn-primary" role="button">BUY NOW</a> --}}
               </div>
             </div>
           </div>
@@ -198,10 +218,18 @@
   <!-- Contact Section End -->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="Style/js/animate.js"></script>
   <script src="Style/js/bootstrap.min.js"></script>
   <script src="Style/js/custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+  </script>
 </body>
 <!-- Body Ended -->
 </html>

@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\dichvu;
-use App\sanpham;
-use App\tintuc;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +36,7 @@ class UserController extends Controller {
 		$user->sdt = $request->sdt;
 		$user->password = bcrypt($request->password);
 		$user->role = $request->role;
+		$user->diachi = $request->diachi;
 		$user->save();
 		return redirect('admin/user/them')->with('thongbao', 'Thêm thành công');
 	}
@@ -55,6 +53,7 @@ class UserController extends Controller {
 		$user->sdt = $request->sdt;
 		$user->password = bcrypt($request->password);
 		$user->role = $request->role;
+		$user->diachi = $request->diachi;
 		$user->save();
 		return redirect('admin/user/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}
@@ -90,10 +89,7 @@ class UserController extends Controller {
 	public function getdangxuat() {
 		Auth::logout();
 		Session::forget('cart');
-		$sanpham = sanpham::where('noibat', 1)->get();
-		$dichvu = dichvu::all();
-		$tintuc = tintuc::orderBy('id', 'desc')->take(2)->get();
-		return view('index', ['sanpham' => $sanpham, 'dichvu' => $dichvu, 'tintuc' => $tintuc]);
+		return redirect('index');
 	}
 	public function getdangky() {
 		return view('dangky');

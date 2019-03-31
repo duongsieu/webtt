@@ -51,11 +51,6 @@
                         <input class="form-control" name="amount" placeholder="" value="{{$sanpham->amount}}" />
                     </div>
                     <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <img width="50px" height="40px" src="upload/{{$sanpham->img}}" alt="">
-                        <input type="file" name="img" class="form-control"  />
-                    </div>
-                    <div class="form-group">
                         <label>Mô tả</label>
                         <textarea id="demo" name="description" class="form-control ckeditor" rows="3">
                         {{$sanpham->description}}

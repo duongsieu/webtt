@@ -49,10 +49,7 @@
                         <label>Nổi bật</label>
                         <input class="form-control" name="noibat" placeholder="" />
                     </div>
-                    <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" name="img" class="form-control" />
-                    </div>
+
                     <div class="form-group">
                         <label>Mô tả</label>
                         <textarea id="demo" name="description" class="form-control ckeditor" rows="3"></textarea>

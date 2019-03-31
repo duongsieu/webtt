@@ -37,10 +37,6 @@
                         <label>Nội dung</label>
                         <textarea id="demo" name="noidung" class="form-control ckeditor" rows="3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" name="img" class="form-control" />
-                    </div>
 
                     <button type="submit" class="btn btn-default">Thêm</button>
                     {{-- <button type="reset" class="btn btn-default">Reset</button> --}}

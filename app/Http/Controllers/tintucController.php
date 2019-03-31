@@ -22,18 +22,6 @@ class tintucController extends Controller {
 		$tintuc->tieude = $request->tieude;
 		$tintuc->tomtat = $request->tomtat;
 		$tintuc->noidung = $request->noidung;
-
-		if ($request->hasFile('img')) {
-			$file = $request->file('img');
-			$duoi = $file->getClientOriginalExtension();
-			if ($duoi != 'jpg' && $duoi != 'png' && $duoi != 'jpeg') {
-				return redirect('admin/tintuc/them')->with('Lỗi', 'Chỉ được chọn file có đuôi jpg, png, jpeg');
-			}
-			$name = $file->getClientOriginalName();
-			// $image = time().'_'.$name;
-			$file->move('upload', $name);
-			$tintuc->img = $name;
-		}
 		$tintuc->save();
 		return redirect('admin/tintuc/them')->with('thongbao', 'Thêm thành công');
 	}
@@ -73,5 +61,4 @@ class tintucController extends Controller {
 		$tintuc = tintuc::find($id);
 		return view('blog_single', ['tintuc' => $tintuc]);
 	}
-
 }

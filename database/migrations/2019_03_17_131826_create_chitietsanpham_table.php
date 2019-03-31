@@ -14,14 +14,14 @@ class CreateChitietsanphamTable extends Migration {
 		Schema::create('chitietsanpham', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->timestamps();
-			$table->string('khoiluong');
-			$table->string('kichthuoc');
-			$table->string('trucbanhxe');
-			$table->string('docaiyen');
-			$table->string('sanggamxe');
-			$table->string('binhxang');
-			$table->string('lopxe');
-			$table->string('congsuattoida');
+			$table->string('khoiluong')->nullable();
+			$table->string('kichthuoc')->nullable();
+			$table->string('trucbanhxe')->nullable();
+			$table->string('docaiyen')->nullable();
+			$table->string('sanggamxe')->nullable();
+			$table->string('binhxang')->nullable();
+			$table->string('lopxe')->nullable();
+			$table->string('congsuattoida')->nullable();
 			$table->bigInteger('id_sanpham');
 		});
 	}

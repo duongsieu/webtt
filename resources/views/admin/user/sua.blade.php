@@ -39,6 +39,10 @@
                                 <label>Role</label>
                                 <input class="form-control" name="role" placeholder="" value="{{$user->role}}" />
                             </div>
+                              <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input class="form-control" name="diachi" placeholder="" value="{{$user->diachi}}" />
+                            </div>
                             <button type="submit" class="btn btn-default">Sửa</button>
                             {{-- <button type="reset" class="btn btn-default">Reset</button> --}}
                         <form>
