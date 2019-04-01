@@ -3,7 +3,7 @@
     <div class="row">
       <div class="inner-content">
         <div class="col-sm-6"  data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
-          <h2 class="left">Contact us for support</h2>
+          <h2 class="left" style="color:#f97000">Liên hệ để được hỗ trợ</h2>
           <form action="lienhe/them" method="POST">
             <input type="hidden" name="_token" value="{{csrf_token()}}" />
             <div class="row">

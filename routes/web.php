@@ -41,7 +41,7 @@ Route::get('dangxuat', 'UserController@getdangxuat');
 Route::get('dangky', 'UserController@getdangky');
 Route::post('dangky', 'UserController@postdangky');
 
-Route::get('index', 'IndexController@getsanphamnoibat');
+Route::get('/', 'IndexController@getsanphamnoibat');
 Route::get('blog_single/{id}', 'tintucController@gettintuc');
 
 Route::get('product_single/{id}', 'chitietsanphamController@getchitiet');

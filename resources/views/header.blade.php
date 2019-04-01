@@ -48,17 +48,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index">shop<span>moto</span></a>
+        <a class="navbar-brand" href="/">shop<span>moto</span></a>
       </div>
       <!-- Collect the nav links and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           {{--  <li class="active"><a href="index"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li> --}}
-          <li class="has-sub-menu"><a href="shop">Sản phẩm </a>
-          <ul class="sub-menu">
-            <li  class="sub-menu-item">1aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa</li>
-          </ul>
-        </li>
+          <li class="has-sub-menu"><a href="shop">Sản phẩm </a> </li>
         <li><a href="dichvu">Dịch vụ </a></li>
         <li><a href="blog">Tin tức </a></li>
         <li><a href="contact">Liên hệ </a></li>

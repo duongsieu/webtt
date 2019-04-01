@@ -69,13 +69,12 @@ class IndexController extends Controller {
 			$bill_detail->id_product = $key;
 			$bill_detail->save();
 		}
-		// $sanpham_cart = $cart->items;
+		$sanpham_cart = $cart->items;
 		// $tensp = $sanpham_cart['name'];
-		// dd($tensp);
-		//	dd($request->email);
+
 		$data = ['hoten' => $request->name,
 			'diachi' => $request->diachi,
-
+			'sp' => $sanpham_cart,
 			'tonghoadon' => $cart->totalPrice,
 		];
 
@@ -117,7 +116,7 @@ class IndexController extends Controller {
 
 	}
 	public function getshop() {
-		$sanpham = sanpham::orderBy('id', 'desc')->get();
+		$sanpham = sanpham::orderBy('id', 'desc')->simplePaginate(5);
 		$images = images::all();
 		$theloai = theloai::all();
 		return view('shop', ['sanpham' => $sanpham, 'images' => $images, 'theloai' => $theloai]);

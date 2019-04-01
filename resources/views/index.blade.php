@@ -98,7 +98,7 @@
     <!-- Product Section End -->
     <section class="blog">
       <div class="container" >
-        <h2>Latest Blog Posts <a class="btn btn-default" href="blog" role="button">go to blog</a></h2>
+        <h2 style="color: #f97000">Tin tức </h2>
         <!-- 1st Row-->
         <div class="row"  >
           @foreach($tintuc as $tt)

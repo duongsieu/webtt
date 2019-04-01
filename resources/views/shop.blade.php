@@ -93,19 +93,18 @@ background: #fff;
         <p class="tieude">Lựa chọn phong cách riêng cho bạn</p>
         <div id="menu">
   <ul>
-        <li><a href="#">Tất cả</a></li>
   @foreach($theloai as $tl)
     <li  id="{{$tl->id}}"><a href="#">{{$tl->name}}
       </a></li>
     @endforeach
   </ul>
 </div>
-        <div class="inner-content">
+        <div class="inner-content " id="sanpham">
           <!-- 1st Row End -->
           <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
             @foreach($sanpham as $sp)
             <div class="col-sm-6 col-md-3 col">
-              <div class="thumbnail" id="sanpham">
+              <div class="thumbnail" >
                 <figure class="image one">
                 @foreach($images as $img)
                   @if($img->id_sanpham == $sp->id && $img->chude == 1 )
@@ -118,7 +117,7 @@ background: #fff;
                   {{-- <p>{!!$sp->description!!}</p> --}}
                   <div class="box">
                     <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
-                    <span class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                    <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </div>
@@ -126,8 +125,7 @@ background: #fff;
             @endforeach
           </div>
           <div class="products-display">
-            <a href="#" class="previous">Previous</a>
-            <a href="#" class="next">Next</a>
+            {{$sanpham->links()}}
           </div>
         </div>
         <!-- Inner-content End -->
@@ -147,12 +145,11 @@ background: #fff;
   </body>
   <script>
     $(document).ready(function(){
-      $("li").change(function() {
+      $("li").click(function() {
            var idtheloai = this.id;
-          $.get("ajax/sanpham"+idtheloai,function(data){
-            alert($data);
-            //$("#sanpham").html(data);
-          });
+          $.get("ajax/sanpham/"+idtheloai,function(data){
+            $("#sanpham").html(data);
+           });
       });
     });
   </script>
