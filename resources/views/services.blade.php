@@ -47,11 +47,11 @@
           <div class="part-1">
             <div class="row" data-aos="fade-up" data-aos-duration="1000">
               <div class="col-md-12 heading">
-                <h3>{{$dv->name}}</h3>
+                <h3>{{$dv->tendv}}</h3>
               </div>
               <div class="col-md-3">
                 <figure>
-                  <img src="upload/{{$dv->img}}" alt="Web Design" width="100%">
+                  <img src="upload/baohanh.jpg" alt="Web Design" width="100%">
                 </figure>
               </div>
               <div class="col-md-9">

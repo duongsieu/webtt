@@ -116,7 +116,7 @@
                                 @endforeach
                                 <li class="list-group-item">
                                     <div class="d-flex flex-row ">
-                                        <h4 class="pr-3"> Tổng tiền:</h4> <h4>{{number_format(Session('cart')->totalPrice)}}</h4>
+                                        <h4 class="pr-3"> Tổng tiền:</h4> <h4>{{number_format($totalPrice)}}</h4>
                                     </div>
                                 </li>
                                 @endif

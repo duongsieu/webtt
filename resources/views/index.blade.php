@@ -45,12 +45,12 @@
         <div class="row" data-aos="fade-up" data-aos-easing="linear"  data-aos-duration="500">
           <!-- 1st col -->
           @foreach($dichvu as $dv)
-          <div class="col-xs-12 col-md-4 col">
+          <div class="col-xs-12 col-md-4 col" style="height: 344px">
             <a href="product_single"><figure class="pete-1" ></figure></a>
             <div class="inner-content">
-              <h2><a href="services">{{$dv->tendv}}</a></h2>
-              <p>{!!$dv->tomtat!!}</p>
-              <p><a href="services">xem thêm...</a></p>
+              <h2>{{$dv->tendv}}</h2>
+              <p  class="abc">{!!$dv->tomtat!!}</p>
+              <p ><a href="dichvu">xem thêm...</a></p>
             </div>
           </div>
           @endforeach
@@ -88,6 +88,41 @@
               </div>
             </div>
           </div>
+          @endforeach
+          <!-- 1st col End-->
+        </div>
+        <!-- Row End -->
+      </div>
+      <!-- Container End-->
+    </section>
+     <section class="product">
+      <!-- Container -->
+      <div class="container">
+        <h2>Sản phẩm nổi bật <a class="btn btn-default" href="shop" role="button">shop more</a></h2>
+        <!-- Row -->
+        <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
+          <!-- 1st col -->
+          @foreach($sanpham2 as $sp)
+
+          <div class="col-sm-6 col-md-3 col">
+            <div class="thumbnail">
+              @foreach($images as $img)
+              @if($img->id_sanpham == $sp->id && $img->chude == '1' && $sp->id_type = '1' )
+              <figure class="image one">
+                <a href="product_single/{{$sp->id}}"><img width="262.5px" height="166.48px" src="upload/{{$img->img}}" class="img-responsive" alt="Responsive image"></a>
+              </figure>
+              @endif
+              @endforeach
+              <div class="caption">
+                <h3><a style="height: 50px" href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
+                <div class="box">
+                  <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
+                  <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           @endforeach
           <!-- 1st col End-->
         </div>

@@ -10,6 +10,7 @@ use App\images;
 use App\sanpham;
 use App\theloai;
 use App\tintuc;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -29,12 +30,13 @@ class IndexController extends Controller {
 	// }
 
 	public function getsanphamnoibat() {
-		$sanpham = sanpham::where('noibat', 1)->get();
+		$sanpham = sanpham::where('noibat', 1)->orderBy('id')->take(4)->get();
+		$sanpham2 = sanpham::where('noibat', 1)->orderBy('id', 'desc')->take(4)->get();
 		$dichvu = dichvu::all();
 		$tintuc = tintuc::orderBy('id', 'desc')->take(2)->get();
 		$images = images::all();
 
-		return view('index', ['sanpham' => $sanpham, 'dichvu' => $dichvu, 'tintuc' => $tintuc, 'images' => $images]);
+		return view('index', ['sanpham' => $sanpham, 'dichvu' => $dichvu, 'tintuc' => $tintuc, 'images' => $images, 'sanpham2' => $sanpham2]);
 	}
 	public function getdathang() {
 		if (Session::has('cart')) {
@@ -116,7 +118,7 @@ class IndexController extends Controller {
 
 	}
 	public function getshop() {
-		$sanpham = sanpham::orderBy('id', 'desc')->simplePaginate(5);
+		$sanpham = sanpham::where('id_type', 1)->orderBy('id', 'desc')->simplePaginate(8);
 		$images = images::all();
 		$theloai = theloai::all();
 		return view('shop', ['sanpham' => $sanpham, 'images' => $images, 'theloai' => $theloai]);
@@ -126,8 +128,31 @@ class IndexController extends Controller {
 		return view('services', ['dichvu' => $dichvu]);
 	}
 	public function gettt() {
-		$tintuc = tintuc::all();
-		return view('blog', ['tintuc' => $tintuc]);
+		$tintuc = tintuc::simplePaginate(4);
+		$images = images::all();
+		return view('blog', ['tintuc' => $tintuc, 'images' => $images]);
+	}
+	public function caidat(Request $request) {
+		$this->validate($request, //ham kierm tra thu nhap hay chua
+			[
+				'newpassword' => 'required',
+				'newpasswordagain' => 'required|same:newpassword',
+			],
+			[
+				'newpassword.required' => 'Bạn phải nhập mật khẩu',
+				'newpasswordagain.required' => 'Bạn phải nhập lại mật khẩu',
+				'newpasswordagain.same' => 'Mật khẩu nhập lại chưa đúng',
+
+			]);
+		$user = User::find(Auth::user()->id);
+		$user->name = $request->name;
+		$user->email = $request->email;
+		$user->sdt = $request->sdt;
+		$user->password = bcrypt($request->newpassword);
+		$user->role = "khach";
+		$user->diachi = $request->diachi;
+		$user->save();
+		return redirect()->back()->with('thongbao', 'Bạn đã cập nhật mật khẩu thành công');
 	}
 
 }

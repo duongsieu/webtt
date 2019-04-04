@@ -65,7 +65,11 @@
         {{session('thongbao')}}
       </div>
       @endif
-
+    @if (session('thongbao3'))
+      <div class="alert alert-danger">
+        {{session('thongbao3')}}
+      </div>
+      @endif
         <span class="login100-form-title">
           Member Login
         </span>
@@ -88,6 +92,7 @@
           Login
           </button>
         </div>
+        <a href="redirect/facebook">FB Login</a
         <div class="text-center p-t-136">
           <a class="txt2" href="dangky">
             Create your Account

@@ -12,6 +12,18 @@
   transition: all ease 2s;
   visibility: hidden;
   }
+  .sub-menu1{
+    display: inline-block;
+  width: 120%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #fff;
+  opacity: 0;
+  transition: all ease 2s;
+  visibility: hidden;
+  }
   .sub-menu-item{
   display: block;
   padding: 20px;
@@ -29,6 +41,11 @@
   visibility: hidden !important;
   }
   .has-sub-menu:hover .sub-menu{
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  }
+   .has-sub-menu:hover .sub-menu1{
   display: block;
   opacity: 1;
   visibility: visible;
@@ -57,10 +74,14 @@
           <li class="has-sub-menu"><a href="shop">Sản phẩm </a> </li>
         <li><a href="dichvu">Dịch vụ </a></li>
         <li><a href="blog">Tin tức </a></li>
-        <li><a href="contact">Liên hệ </a></li>
         @if(Auth::check())
-        <li><a href="">{{Auth::user()->name}}</a></li>
-        <li><a href="dangxuat">Đăng xuất</a></li>
+        <li class="has-sub-menu "><a class="fa fa-user" href="">&#160;&#160;{{Auth::user()->name}}</a>
+          <ul class="sub-menu1 ">
+             <li class="sub-menu-item"><a style="color:#362f2d" href="caidat">Cài đặt</a></li>
+            <li class="sub-menu-item"><a style="color:#362f2d" href="dangxuat">Đăng xuất</a></li>
+
+          </ul>
+        </li>
         @else
         <li><a href="dangnhap">Đăng nhập</a></li>
         @endif

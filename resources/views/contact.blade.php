@@ -17,14 +17,17 @@
             <textarea class="form-control" name="noidung" placeholder="Nội dung" rows="8"></textarea><br>
             <div class="row">
               <div class="col-sm-12 form-group">
-                <button class="btn btn-default pull-left" type="submit">Get In Touch</button>
+                <button class="btn btn-default pull-left" type="submit">Liên Hệ</button>
               </div>
             </div>
           </form>
         </div>
         <div class="col-sm-5 address"  data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
-          <h2>Our Office Address</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five </p>
+          <h2 style="color: #f97000">Địa chỉ văn phòng</h2>
+          <p style="color: #f97000">
+Thôn phú sơn nam, Hòa khương, Hòa vang, Đà nẵng
+Tel: (84) 934701601
+</p>
           <ul class="social-icon">
             <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
             <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
@@ -40,28 +43,21 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <p><a class="footer-logo" href="index">pet<span>z</span></a></p>
+          <p><a class="footer-logo" href="index">shop<span>moto</span></a></p>
         </div>
         <div class="col-sm-9">
           <ul>
-            <li><a href="index">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="about">About</a></li>
+
+            <li><a href="shop">Product</a></li>
             <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="products">Product</a></li>
-            <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="services">Services</a></li>
-            <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="shop">shop</a></li>
+            <li><a href="dichvu">Services</a></li>
             <li><a class="hidden-xs" href="#">|</a></li>
             <li><a href="blog">blog</a></li>
             <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="careers">careers</a></li>
-            <li><a class="hidden-xs" href="#">|</a></li>
-            <li><a href="#contact">contact</a></li>
-            <li><a class="hidden-xs" href="#">|</a></li>
           </ul>
-          <p>(C) 2017, All Rights Reserved <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Petz Theme</a></span>, Designed by <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Template.net</a></span></p>
+          <p>(C) 2019, <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Shopmoto</a></span>, Designed by <span><a href="https://www.template.net/editable/websites/html5" target="_blank">DuongSieu</a></span></p>
         </div>
       </div>
     </div>

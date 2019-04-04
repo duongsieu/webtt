@@ -44,24 +44,27 @@
         <section class="blog">
             <div class="container">
                 <div class="inner-content">
+                   <div class="row"  >
+          @foreach($tintuc as $tt)
+          <div class="col-md-6"  >
+            <div class="thumbnail">
+              <div class="caption">
+                <h3><a href="blog_single/{{$tt->id}}">{{$tt->tieude}}</a></h3>
+                <p><span><a href="blog_single/{{$tt->id}}">read more...</a></span></p>
+              </div>
+              @foreach($images as $img)
+              @if($img->id_tintuc == $tt->id)
+              <img src="upload/{{$img->img}}" class="img-responsive" alt="post-1">
+              @endif
+              @endforeach
+            </div>
+          </div>
+          @endforeach
+        </div>
 
-                    <div class="row"  data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
-                         @foreach($tintuc as $tt)
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <h3><a href="blog_single/{{$tt->id}}">{{$tt->tieude}}</a></h3>
-                                    <p><span><a href="blog_single/{{$tt->id}}">read more...</a></span></p>
-                                </div>
-                                <img src="upload/{{$tt->img}}" class="img-responsive" alt="...">
-                            </div>
-                        </div>
-                                @endforeach
-                    </div>
 
                     <div class="products-display">
-                        <a href="#" class="previous">Previous</a>
-                        <a href="#" class="next">Next</a>
+                          {{$tintuc->links()}}
                     </div>
                 </div>
                 </div><!-- /.container -->

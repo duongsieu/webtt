@@ -36,7 +36,7 @@
     <![endif]-->
     <style>
       .wrap-login100{
-        padding-top: 100px;
+        padding-top: 63px;
       }
     </style>
   </head>
@@ -45,9 +45,6 @@
 
 
          <div class="wrap-login100">
-          <div class="login100-pic js-tilt" style="padding-top: 50px" data-tilt>
-        <img src="StyleLogin/images/img-01.png" alt="IMG">
-      </div>
 
       @if (count($errors ) > 0 )
       <div class="alert alert-danger">
@@ -58,32 +55,40 @@
       @endif
 
       <div>
-      <form action="dangky" class="login100-form validate-form" method="POST">
+      <form  style="width: 450px; margin-left: 320px" action="caidat" class="login100-form validate-form" method="POST">
         <input type="hidden" name="_token" value="{{csrf_token()}}" />
         <span class="login100-form-title">
-          Đăng ký
+          Cài đặt
         </span>
-        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" name="name" placeholder=" Nhập tên của bạn">
+          @if (session('thongbao'))
+      <div class="alert alert-danger">
+        {{session('thongbao')}}
+      </div>
+      @endif
+        <div class="wrap-input100 validate-input" >
+          <input class="input100" type="text" name="name" value="{{Auth::user()->name}}">
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" name="email" placeholder="Nhập email">
+          <input class="input100" type="text" name="email" placeholder="Nhập email" value="{{Auth::user()->email}}">
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" name="sdt" placeholder="Nhập sdt">
+          <input class="input100" type="text" name="sdt" placeholder="Nhập sdt" value="{{Auth::user()->sdt}}">
         </div>
-        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" name="diachi" placeholder="Nhập địa chỉ">
+          <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+          <input class="input100" type="text" name="diachi" placeholder="Nhập sdt" value="{{Auth::user()->diachi}}">
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Password is required">
-          <input class="input100" type="password" name="password" placeholder="Password">
+          <input class="input100" type="password" name="password" placeholder="Password" value="{{Auth::user()->password}}">
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Password is required">
-          <input class="input100" type="password" name="passwordagain" placeholder="Password">
+          <input class="input100" type="text" name="newpassword" placeholder="New Pasword">
+        </div>
+            <div class="wrap-input100 validate-input" data-validate = "Password is required">
+          <input class="input100" type="text" name="newpasswordagain" placeholder="New Password again">
         </div>
         <div class="container-login100-form-btn">
           <button class="login100-form-btn" type="submit">
-          Đăng ký
+        Cập nhật
           </button>
         </div>
 

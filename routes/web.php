@@ -14,11 +14,19 @@
 Route::get('/', function () {
 	return view('welcome');
 });
+Route::get('chitiet2', function () {
+	return view('products_single2');
+});
 Route::get('blog', 'IndexController@gettt');
 
 Route::get('careers', function () {
 	return view('careers');
 });
+Route::get('caidat', function () {
+	return view('caidat');
+});
+Route::post('caidat', 'IndexController@caidat');
+
 Route::get('contact', function () {
 	return view('blog#contact');
 });
@@ -56,9 +64,12 @@ Route::group(['prefix' => 'ajax'], function () {
 	Route::get('sanpham/{idtheloai}', 'AjaxController@getsanpham');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function () {
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
+
+Route::group(['prefix' => 'admin'], function () {
 	Route::group(['prefix' => 'theloai'], function () {
-		//admin/theloai/....
+		//admin/	theloai/....
 		Route::get('danhsach', 'TheloaiController@getDanhsach');
 
 		Route::get('sua/{id}', 'TheloaiController@getSua');

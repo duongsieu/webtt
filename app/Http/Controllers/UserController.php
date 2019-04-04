@@ -40,7 +40,6 @@ class UserController extends Controller {
 		$user->save();
 		return redirect('admin/user/them')->with('thongbao', 'Thêm thành công');
 	}
-
 	public function getSua($id) {
 		$user = User::find($id);
 		return view('admin.user.sua', ['user' => $user]);
@@ -81,7 +80,7 @@ class UserController extends Controller {
 		if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => "admin"])) {
 			return redirect('admin/user/danhsach');
 		} elseif (Auth::attempt(['email' => $email, 'password' => $password, 'role' => "khach"])) {
-			return redirect('index');
+			return redirect('/');
 		} else {
 			return redirect('dangnhap')->with('thongbao', 'Đăng nhập không thành công');
 		}
@@ -89,7 +88,7 @@ class UserController extends Controller {
 	public function getdangxuat() {
 		Auth::logout();
 		Session::forget('cart');
-		return redirect('index');
+		return redirect('/');
 	}
 	public function getdangky() {
 		return view('dangky');
@@ -120,8 +119,9 @@ class UserController extends Controller {
 		$user->sdt = $request->sdt;
 		$user->password = bcrypt($request->password);
 		$user->role = "khach";
+		$user->diachi = $request->diachi;
 		$user->save();
-		return redirect('dangky')->with('thongbao', 'Chúc mừng bạn đã đăng ký thành công');
+		return redirect('dangnhap')->with('thongbao3', 'Chúc mừng bạn đã đăng ký thành công');
 	}
 
 }
