@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\chitietsanpham;
-use App\images;
 use App\sanpham;
 use App\theloai;
 use Illuminate\Http\Request;
@@ -42,30 +41,10 @@ class SanphamController extends Controller {
 			]);
 		///
 		$sanpham = new sanpham;
-		$sanpham->name = $request->name;
-		$sanpham->price = $request->price;
-		$sanpham->amount = $request->amount;
-
-		$sanpham->description = $request->description;
-		$sanpham->id_type = $request->TheLoai;
-		$sanpham->noibat = $request->noibat;
-
-		$sanpham->save();
+		$sanpham->add($request);
 		///
 		$chitietsanpham = new chitietsanpham;
-		$chitietsanpham->khoiluong = $request->khoiluong;
-		$chitietsanpham->kichthuoc = $request->kichthuoc;
-		$chitietsanpham->trucbanhxe = $request->trucbanhxe;
-		$chitietsanpham->docaiyen = $request->docaiyen;
-		$chitietsanpham->sanggamxe = $request->sanggamxe;
-		$chitietsanpham->binhxang = $request->binhxang;
-		$chitietsanpham->lopxe = $request->lopxe;
-		$chitietsanpham->congsuattoida = $request->congsuattoida;
-		$chitietsanpham->id_sanpham = $sanpham->id;
-		$chitietsanpham->save();
-		$image = new images;
-		$image->id_sanpham = $sanpham->id;
-
+		$chitietsanpham->add($request, $sanpham->id);
 		return redirect('admin/sanpham/them')->with('thongbao', 'Thêm thành công');
 	}
 
@@ -76,7 +55,7 @@ class SanphamController extends Controller {
 	}
 
 	public function postSua(Request $request, $id) {
-		$sanpham = sanpham::find($id);
+
 		$this->validate($request, //ham kierm tra thu nhap hay chua
 			[
 				'name' => 'required|min:3|max:100',
@@ -95,14 +74,8 @@ class SanphamController extends Controller {
 				'description' => 'Bạn chưa chọn thể loại',
 			]);
 
-		$sanpham->name = $request->name;
-		$sanpham->price = $request->price;
-		$sanpham->amount = $request->amount;
-		$sanpham->description = $request->description;
-		$sanpham->id_type = $request->TheLoai;
-		$sanpham->noibat = $request->noibat;
-
-		$sanpham->save();
+		$sanpham = sanpham::find($id);
+		$sanpham->add($request);
 		return redirect('admin/sanpham/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}
 	public function getxoa($id) {

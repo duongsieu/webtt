@@ -91,6 +91,12 @@ background: #fff;
     <section id="product">
       <div class="container">
         <p class="tieude">Lựa chọn phong cách riêng cho bạn</p>
+        <div class="box" style="margin-left: 460px;padding-bottom: 20px">
+  <div class="container-1">
+      <span class="icon" id="vls"><i class="fa fa-search" ></i></span>
+      <input type="text" id="search" placeholder="Search..." />
+  </div>
+</div>
         <div id="menu">
   <ul>
   @foreach($theloai as $tl)
@@ -106,28 +112,18 @@ background: #fff;
             @foreach($sanpham as $sp)
 
             <div class="col-sm-6 col-md-3 col" >
-              <div class="thumbnail" >
-                <figure class="image one" >
-                @foreach($images as $img)
-                  @if($img->id_sanpham == $sp->id && $img->chude == 1 )
-                  <a href="product_single/{{$sp->id}}"><img style="height: 141px" src="upload/{{$img->img}}" class="img-responsive" alt="Responsive image"></a>
-                    @endif
-                  @endforeach
-                </figure>
-                <div class="caption">
-                  <h3 style="height: 70px !important"><a  href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
+              <div class="thumbnail" id="sanpham">
 
-                  <div class="box">
-                    <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
-                    <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                  </div>
-                </div>
               </div>
             </div>
 
             @endforeach
 
           </div>
+          <div class="products-display">
+            {{$sanpham->links()}}
+          </div>
+        </div>
           <div class="products-display">
             {{$sanpham->links()}}
           </div>
@@ -151,11 +147,34 @@ background: #fff;
     $(document).ready(function(){
       $("li").click(function() {
            var idtheloai = this.id;
+
           $.get("ajax/sanpham/"+idtheloai,function(data){
             $("#sanpham").html(data);
            });
       });
     });
   </script>
+    <script>
+    $(document).ready(function(){
+      $("#vls").click(function() {
+           var key = $('#search').val();
+           // alert(key);
+          $.get("ajax/timkiem/"+key,function(data){
+            $("#sanpham").html(data);
+           });
+      });
+    });
+  </script>
+   <script>
+      $(document).ready(function(){
+      $("a").click(function() {
+      var key = this.id;
+      $.get("ajax/muahang/"+key,function(data){
+      $("#cart").html(data);
+      alert("them thanh cong");
+      });
+      });
+      });
+      </script>
   <!-- Body Ended -->
 </html>

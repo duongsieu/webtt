@@ -1,4 +1,5 @@
 <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
+          @if(count($sanpham) >0)
             @foreach($sanpham as $sp)
 
             <div class="col-sm-6 col-md-3 col">
@@ -26,14 +27,11 @@
             </div>
 
             @endforeach
-
+            @else
+               <p>Không có sản phẩm theo yêu cầu của bạn</p>
+            @endif
           </div>
-
-
-          <div class="products-display">
-            {{$sanpham->links()}}
-          </div>
-            <script>
+             <script>
       $(document).ready(function(){
       $("a").click(function() {
       var key = this.id;
@@ -44,3 +42,8 @@
       });
       });
       </script>
+
+{{--
+          <div class="products-display">
+            {{$sanpham->links()}}
+          </div> --}}

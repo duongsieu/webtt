@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable {
@@ -41,4 +42,17 @@ class User extends Authenticatable {
 	public function binhluan() {
 		return $this->hasMany('App\binhluan', 'id_user', 'id');
 	}
+	public function add(Request $request) {
+		$this->name = $request->name;
+		$this->email = $request->email;
+		$this->sdt = $request->sdt;
+		$this->password = bcrypt($request->password);
+		$this->role = $request->role;
+		$this->diachi = $request->diachi;
+		$this->save();
+	}
+	public function getuserbyid($id) {
+		return $this->find($id);
+	}
+
 }

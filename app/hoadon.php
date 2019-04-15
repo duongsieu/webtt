@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class hoadon extends Model {
 	//
@@ -12,5 +14,13 @@ class hoadon extends Model {
 	}
 	public function user() {
 		return $this->belongsTo('App\User', 'id_user', 'id');
+	}
+	public function add(Request $request, $cart) {
+		$this->id_user = Auth::user()->id;
+		$this->ngay = date('Y-m-d');
+		$this->tonghoadon = $cart->totalPrice;
+		$this->note = $request->note;
+		$this->status = 'Chưa giao hàng';
+		$this->save();
 	}
 }

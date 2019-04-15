@@ -10,16 +10,16 @@ use Session;
 class UserController extends Controller {
 
 	//
-
+	//lấy tất cả danh sách người dùng
 	public function getDanhsach() {
 		$user = User::all();
 		return view('admin.user.danhsach', ['user' => $user]);
 	}
-
+	//Hiển thị trang thêm người dùng
 	public function getthem() {
 		return view('admin.user.them');
 	}
-
+	//Thực hiện chức năng thêm người dùng
 	public function postthem(Request $request) {
 		$this->validate($request, //ham kierm tra thu nhap hay chua
 			[
@@ -31,40 +31,39 @@ class UserController extends Controller {
 				'name.max' => 'Tên thể loại có độ dài từ 3-100',
 			]);
 		$user = new User;
-		$user->name = $request->name;
-		$user->email = $request->email;
-		$user->sdt = $request->sdt;
-		$user->password = bcrypt($request->password);
-		$user->role = $request->role;
-		$user->diachi = $request->diachi;
-		$user->save();
+		$user->add($request);
+
 		return redirect('admin/user/them')->with('thongbao', 'Thêm thành công');
 	}
+	//hiển thị thông tin người dùng cần sửa
 	public function getSua($id) {
-		$user = User::find($id);
+		$user1 = new User;
+		$user = $user1->getuserbyid($id);
 		return view('admin.user.sua', ['user' => $user]);
 	}
-
+	//Thực hiện cập nhật thông tin người dùng sau khi sữa
 	public function postSua(Request $request, $id) {
 		$user = User::find($id);
-		$user->name = $request->name;
-		$user->email = $request->email;
-		$user->sdt = $request->sdt;
-		$user->password = bcrypt($request->password);
-		$user->role = $request->role;
-		$user->diachi = $request->diachi;
-		$user->save();
+		$user->add($request);
 		return redirect('admin/user/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}
+	//xóa một người dùng
 	public function getxoa($id) {
 		$user = User::find($id);
 		$user->delete();
 		return redirect('admin/user/danhsach')->with('thongbao', 'Xóa thành công');
 	}
-	public function getdangnhapAdmin() {
-		return view('login');
+	//hiển thị trang đăng nhập, khi đăng nhập rồi thì khôgn đc đăng nhập nữa
+	public function getdangnhap() {
+		if (Auth::check()) {
+			return redirect('/');
+		} else {
+			return view('login');
+		}
+
 	}
-	public function postdangnhapAdmin(Request $request) {
+	//Thực hiên đăng nhập khi người dùng nhập đúng email và mật khẩu
+	public function postdangnhap(Request $request) {
 		$this->validate($request,
 			[
 				'email' => 'required',
@@ -77,22 +76,26 @@ class UserController extends Controller {
 			]);
 		$email = $request->email;
 		$password = $request->password;
+
 		if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => "admin"])) {
-			return redirect('admin/user/danhsach');
+			return redirect('admin/index');
 		} elseif (Auth::attempt(['email' => $email, 'password' => $password, 'role' => "khach"])) {
-			return redirect('/');
+			return redirect()->back();
 		} else {
 			return redirect('dangnhap')->with('thongbao', 'Đăng nhập không thành công');
 		}
 	}
+	//thực hiện chức năng đăng xuất
 	public function getdangxuat() {
 		Auth::logout();
 		Session::forget('cart');
 		return redirect('/');
 	}
+	//hiển thị trang đăng ký
 	public function getdangky() {
 		return view('dangky');
 	}
+	//thực hiên thêm người dùng khi người dùng đăng kí tài khảon
 	public function postdangky(Request $request) {
 		$this->validate($request, //ham kierm tra thu nhap hay chua
 			[
@@ -114,13 +117,7 @@ class UserController extends Controller {
 
 			]);
 		$user = new User;
-		$user->name = $request->name;
-		$user->email = $request->email;
-		$user->sdt = $request->sdt;
-		$user->password = bcrypt($request->password);
-		$user->role = "khach";
-		$user->diachi = $request->diachi;
-		$user->save();
+		$user->add($request);
 		return redirect('dangnhap')->with('thongbao3', 'Chúc mừng bạn đã đăng ký thành công');
 	}
 

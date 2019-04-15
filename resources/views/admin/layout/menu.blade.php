@@ -54,9 +54,6 @@
                     <li>
                         <a href="admin/hoadon/danhsach">Danh Sách</a>
                     </li>
-                    <li>
-                        <a href="admin/hoadon/danhsach">Thêm</a>
-                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

@@ -70,6 +70,11 @@
         {{session('thongbao3')}}
       </div>
       @endif
+        @if (session('thongbao4'))
+      <div class="alert alert-danger">
+        {{session('thongbao4')}}
+      </div>
+      @endif
         <span class="login100-form-title">
           Member Login
         </span>

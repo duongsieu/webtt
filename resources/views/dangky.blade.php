@@ -75,6 +75,7 @@
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
           <input class="input100" type="text" name="diachi" placeholder="Nhập địa chỉ">
         </div>
+        <input type="hidden" name="role" value="khach">
         <div class="wrap-input100 validate-input" data-validate = "Password is required">
           <input class="input100" type="password" name="password" placeholder="Password">
         </div>

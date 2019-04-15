@@ -13,4 +13,11 @@ class AjaxController extends Controller {
 		return view('spfltl', ['sanpham' => $sanpham, 'images' => $images]);
 
 	}
+	public function gettimkiem($key) {
+		$sanpham = sanpham::where('name', 'like', '%' . $key . '%')
+			->orwhere('price', $key)->get();
+		$images = images::all();
+		// dd($sanpham);
+		return view('timkiem', ['sanpham' => $sanpham, 'images' => $images]);
+	}
 }

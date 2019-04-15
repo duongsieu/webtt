@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-sm-12">
                     <div class="cart" data-aos="fade-up" data-aos-duration="1500">
-                        <a href="muahang/{{$sanpham->id}}" class="btn btn-info" role="button">ADD TO CART</a>
+                        <a   abc="{{$sanpham->id}}" class="btn btn-info ac" role="button">ADD TO CART</a>
                     </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
             <h3 style="height: 70px !important"><a href="product_single">{{$spcl->name}}</a></h3>
             <div class="box">
               <p> {{$spcl->price}}</p>
-             <a class="cart" href="muahang/{{$spcl->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+             <a class="cart ac"  abc="{{$spcl->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -232,7 +232,19 @@
       <script src="Style/js/animate.js"></script>
       <script src="Style/js/bootstrap.min.js"></script>
       <script src="Style/js/custom.js"></script>
+ <script>
+      $(document).ready(function(){
+      $('.ac').click(function() {
+     var key = $(".ac").attr("abc");
 
+      $.get("ajax/muahang/"+key,function(data){
+      $("#cart").html(data);
+      alert("them thanh cong");
+      });
+      });
+      });
+
+      </script>
     </body>
   <!-- Body Ended -->
 </html>

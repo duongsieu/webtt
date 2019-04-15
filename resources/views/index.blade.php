@@ -83,7 +83,11 @@
                 <p>{!!$sp->description!!}</p>
                 <div class="box">
                   <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
-                  <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  @if($sp->amount > 0)
+                  <a class="cart" id="{{$sp->id}}" " ><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  @else
+                  <i>Hết hàng</i>
+                  @endif
                 </div>
               </div>
             </div>
@@ -95,7 +99,7 @@
       </div>
       <!-- Container End-->
     </section>
-     <section class="product">
+    <section class="product">
       <!-- Container -->
       <div class="container">
         <h2>Sản phẩm nổi bật <a class="btn btn-default" href="shop" role="button">shop more</a></h2>
@@ -103,7 +107,6 @@
         <div class="row"  data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="500">
           <!-- 1st col -->
           @foreach($sanpham2 as $sp)
-
           <div class="col-sm-6 col-md-3 col">
             <div class="thumbnail">
               @foreach($images as $img)
@@ -117,12 +120,15 @@
                 <h3><a style="height: 50px" href="product_single/{{$sp->id}}">{{$sp->name}}</a></h3>
                 <div class="box">
                   <p><span>{{number_format($sp->price)}}</span>&#8363;</p>
-                  <a class="cart" href="muahang/{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  @if($sp->amount > 0)
+                  <a class="cart"  id="{{$sp->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  @else
+                  <i>Hết hàng</i>
+                  @endif
                 </div>
               </div>
             </div>
           </div>
-
           @endforeach
           <!-- 1st col End-->
         </div>
@@ -152,6 +158,7 @@
           </div>
           @endforeach
         </div>
+        <div id="yy"></div>
         <!-- 1st Row End-->
         <!-- 2st Row-->
         <!-- 2st Row End-->
@@ -171,6 +178,18 @@
       <script src="Style/js/animate.js"></script>
       <script src="Style/js/bootstrap.min.js"></script>
       <script src="Style/js/custom.js"></script>
+      <script>
+      $(document).ready(function(){
+      $("a").click(function() {
+      var key = this.id;
+      $.get("ajax/muahang/"+key,function(data){
+      $("#cart").html(data);
+      alert("them thanh cong");
+      });
+      });
+      });
+      </script>
+
     </body>
     <!-- Body Ended -->
   </html>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class sanpham extends Model {
 	//
@@ -22,5 +23,18 @@ class sanpham extends Model {
 	public function images() {
 		return $this->hasMany('App\images', 'id_sanpham', 'id');
 	}
+	public function add(Request $request) {
+		$this->name = $request->name;
+		$this->price = $request->price;
+		$this->amount = $request->amount;
 
+		$this->description = $request->description;
+		$this->id_type = $request->TheLoai;
+		$this->noibat = $request->noibat;
+
+		$this->save();
+	}
+	public function getspnb() {
+		return $this->where('noibat', 1)->get();
+	}
 }

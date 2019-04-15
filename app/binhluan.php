@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class binhluan extends Model {
 	//
@@ -12,5 +14,14 @@ class binhluan extends Model {
 	}
 	public function sanpham() {
 		return $this->belongsTo('App\sanpham', 'id_sanpham', 'id');
+	}
+	//them binh luan
+	public function add(Request $request, $id) {
+		$idsp = $id;
+		$this->id_user = Auth::user()->id;
+		$this->id_sanpham = $idsp;
+		$this->noidung = $request->noidung;
+		$this->save();
+
 	}
 }

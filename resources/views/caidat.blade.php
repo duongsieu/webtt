@@ -80,6 +80,7 @@
         <div class="wrap-input100 validate-input" data-validate = "Password is required">
           <input class="input100" type="password" name="password" placeholder="Password" value="{{Auth::user()->password}}">
         </div>
+        <input type="hidden" name="role" value="khach">
         <div class="wrap-input100 validate-input" data-validate = "Password is required">
           <input class="input100" type="text" name="newpassword" placeholder="New Pasword">
         </div>

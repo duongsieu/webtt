@@ -28,7 +28,6 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-
     .product {background-image: none;}
     .center{
     max-width: 50%;
@@ -45,7 +44,6 @@
     .slideshow-container {
     max-width: 500px;
     position: relative;
-
     }
     /* Ẩn các slider */
     .mySlides {
@@ -120,7 +118,6 @@
           </div>
           <br>
           <div style="text-align:center">
-
             <span class="dot" onclick="currentSlide(0)"></span>
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
@@ -128,7 +125,7 @@
             <span class="dot" onclick="currentSlide(4)"></span>
             <span class="dot" onclick="currentSlide(5)"></span>
             <span class="dot" onclick="currentSlide(6)"></span>
-             <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
           </div>
           <div class="wrap-table100">
             <h1 style="font-size: 30px;  color: #ff9700;   text-align: center;   padding-top: 48px;    padding-bottom: 30px;">Thông số kỹ thuật</h1>
@@ -188,7 +185,11 @@
         <div class="row myrow">
           <div class="col-sm-12">
             <div class="cart" data-aos="fade-up" data-aos-duration="1500">
-              <a href="muahang/{{$sanpham->id}}" class="btn btn-info" role="button">ADD TO CART</a>
+              @if($sanpham->amount > 0)
+              <a  class="cart ac"  abc="{{$sanpham->id}}" class="btn btn-info ac">ADD TO CART</a>
+              @else
+              <p class="btn btn-info">Hết hàng</p>
+              @endif
             </div>
           </div>
         </div>
@@ -220,7 +221,7 @@
       <div class="myreview"  data-aos="fade-up">
         @foreach($sanpham->binhluan as $bl)
         <div class="review-content">
-          <h6><p>trả lời bởi</p>{{Auth::user()->name}}
+          <h6><p>trả lời bởi</p>{{$bl->user->name}}
           </h6>
           <p>{{$bl->noidung}}</p>
         </div>
@@ -250,7 +251,11 @@
             <h3 style="height: 70px !important"><a href="product_single">{{$spcl->name}}</a></h3>
             <div class="box">
               <p> {{$spcl->price}}</p>
-             <a class="cart" href="muahang/{{$spcl->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+              @if($spcl->amount > 0)
+              <a class="cart ac"  abc="{{$spcl->id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+              @else
+              <i>Hết hàng</i>
+              @endif
             </div>
           </div>
         </div>
@@ -272,43 +277,46 @@
 {{-- <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> --}}
 <script>
 $(document).ready(function(){
-$('.slider').bxSlider();
+$('.ac').click(function() {
+var key = $(".ac").attr("abc");
+$.get("ajax/muahang/"+key,function(data){
+$("#cart").html(data);
+alert("them thanh cong");
+});
+});
 });
 </script>
 <script>
-  //khai báo biến slideIndex đại diện cho slide hiện tại
-  var slideIndex;
-  // KHai bào hàm hiển thị slide
-  function showSlides() {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("dot");
-      for (i = 0; i < slides.length; i++) {
-         slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-      }
-
-      slides[slideIndex].style.display = "block";
-      dots[slideIndex].className += " active";
-      //chuyển đến slide tiếp theo
-      slideIndex++;
-      //nếu đang ở slide cuối cùng thì chuyển về slide đầu
-      if (slideIndex > slides.length - 1) {
-        slideIndex = 0;
-         slideIndex++;
-      }
-      //tự động chuyển đổi slide sau 5s
-      setTimeout(showSlides, 3000);
-  }
-  //mặc định hiển thị slide đầu tiên
-  showSlides(slideIndex = 0);
-
-
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
+//khai báo biến slideIndex đại diện cho slide hiện tại
+var slideIndex;
+// KHai bào hàm hiển thị slide
+function showSlides() {
+var i;
+var slides = document.getElementsByClassName("mySlides");
+var dots = document.getElementsByClassName("dot");
+for (i = 0; i < slides.length; i++) {
+slides[i].style.display = "none";
+}
+for (i = 0; i < dots.length; i++) {
+dots[i].className = dots[i].className.replace(" active", "");
+}
+slides[slideIndex].style.display = "block";
+dots[slideIndex].className += " active";
+//chuyển đến slide tiếp theo
+slideIndex++;
+//nếu đang ở slide cuối cùng thì chuyển về slide đầu
+if (slideIndex > slides.length - 1) {
+slideIndex = 0;
+slideIndex++;
+}
+//tự động chuyển đổi slide sau 5s
+setTimeout(showSlides, 3000);
+}
+//mặc định hiển thị slide đầu tiên
+showSlides(slideIndex = 0);
+function currentSlide(n) {
+showSlides(slideIndex = n);
+}
 </script>
 </body>
 <!-- Body Ended -->

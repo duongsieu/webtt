@@ -34,6 +34,14 @@ class AppServiceProvider extends ServiceProvider {
 				$view->with(['cart' => Session::get('cart'), 'sanpham_cart' => $cart->items, 'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty, 'images' => $images]);
 			}
 		});
+		view()->composer('cart', function ($view) {
+			if (Session::has('cart')) {
+				$oldCart = Session::get('cart');
+				$cart = new cart($oldCart);
+				$images = images::all();
+				$view->with(['cart' => Session::get('cart'), 'sanpham_cart' => $cart->items, 'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty, 'images' => $images]);
+			}
+		});
 	}
 
 }

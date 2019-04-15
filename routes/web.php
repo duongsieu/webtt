@@ -25,24 +25,13 @@ Route::get('careers', function () {
 Route::get('caidat', function () {
 	return view('caidat');
 });
-Route::post('caidat', 'IndexController@caidat');
-
-Route::get('contact', function () {
-	return view('blog#contact');
-});
-Route::group(['prefix' => 'lienhe'], function () {
-	Route::get('them', 'LienheController@getthem');
-	Route::post('them', 'LienheController@postthem');
-});
-
-Route::get('shop', 'IndexController@getshop');
-Route::get('dichvu', 'IndexController@getdv');
+//
 // Route::get('lienket', function () {
 // 	$data = App\sanpham::find(1)->theloai->toArray();
 // 	var_dump($data);
 // });
-Route::get('dangnhap', 'UserController@getdangnhapAdmin');
-Route::post('dangnhap', 'UserController@postdangnhapAdmin');
+Route::get('dangnhap', 'UserController@getdangnhap');
+Route::post('dangnhap', 'UserController@postdangnhap');
 
 Route::get('dangxuat', 'UserController@getdangxuat');
 
@@ -56,18 +45,26 @@ Route::get('product_single/{id}', 'chitietsanphamController@getchitiet');
 Route::post('binhluan/{id}', 'binhluanController@postbinhluan');
 
 Route::get('muahang/{id}', 'IndexController@getAddtocart');
-Route::get('xoahang/{id}', 'IndexController@getDelcart');
+
 Route::get('dathang', 'IndexController@getdathang');
 Route::post('dathang', 'IndexController@postdathang');
 
+Route::get('xoahang/{key}', 'IndexController@getDelcart');
 Route::group(['prefix' => 'ajax'], function () {
 	Route::get('sanpham/{idtheloai}', 'AjaxController@getsanpham');
+	Route::get('timkiem/{key}', 'AjaxController@gettimkiem');
+	Route::get('muahang/{key}', 'IndexController@getAddtocart');
+
 });
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'Adminmiddleware'], function () {
+	Route::get('index', function () {
+		return view('admin.layout.index');
+	});
+
 	Route::group(['prefix' => 'theloai'], function () {
 		//admin/	theloai/....
 		Route::get('danhsach', 'TheloaiController@getDanhsach');
@@ -164,3 +161,12 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 
 });
+
+Route::post('caidat', 'IndexController@caidat');
+
+Route::group(['prefix' => 'lienhe'], function () {
+	Route::post('them', 'LienheController@postthem');
+});
+
+Route::get('shop', 'IndexController@getshop');
+Route::get('dichvu', 'IndexController@getdv');

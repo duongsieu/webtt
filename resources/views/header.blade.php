@@ -79,13 +79,17 @@
           <ul class="sub-menu1 ">
              <li class="sub-menu-item"><a style="color:#362f2d" href="caidat">Cài đặt</a></li>
             <li class="sub-menu-item"><a style="color:#362f2d" href="dangxuat">Đăng xuất</a></li>
+            @if(Auth::user()->role == "admin")
+                <li class="sub-menu-item"><a style="color:#362f2d" href="admin/index">Quản lý</a></li>
+                @else
 
+            @endif
           </ul>
         </li>
         @else
         <li><a href="dangnhap">Đăng nhập</a></li>
         @endif
-        <li class="has-sub-menu no-hove" > <a  ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span style="margin-left: 5px;">Giỏ hàng(@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trống @endif)</span></a>
+        <li class="has-sub-menu no-hove" id="cart" > <a  ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span style="margin-left: 5px;">Giỏ hàng(@if(Session::has('cart')){{Session('cart')->totalQty}}@else Trống @endif)</span></a>
         @if(Session::has('cart'))
         <ul id="mydrop" class="sub-menu cart-menu">
 
@@ -98,7 +102,7 @@
             @endforeach
             <span>{{$sp['item']['name']}}</span>&#124;
             <span>{{$sp['qty']}}*<span>{{number_format($sp['item']['price'])}}</span></span>
-            <a href ="xoahang/{{$sp['item']['id']}}">Xóa</a>
+            <a  href="xoahang/{{$sp['item']['id']}}">Xóa</a>
           </li>
           @endforeach
           <span>Tổng tiền: {{number_format( Session('cart')->totalPrice)}}</span>&#124;&#124;

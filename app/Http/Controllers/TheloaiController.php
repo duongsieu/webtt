@@ -6,17 +6,17 @@ use App\theloai;
 use Illuminate\Http\Request;
 
 class TheloaiController extends Controller {
-	//
 
+	//thực hiện lấy danh sách tất cả thể loại
 	public function getDanhsach() {
 		$theloai = theloai::all();
 		return view('admin.theloai.danhsach', ['theloai' => $theloai]);
 	}
-
+	//hiển thị giao diện thêm thể loại
 	public function getthem() {
 		return view('admin.theloai.them');
 	}
-
+	//
 	public function postthem(Request $request) {
 		$this->validate($request, //ham kierm tra thu nhap hay chua
 			[
@@ -28,8 +28,7 @@ class TheloaiController extends Controller {
 				'name.max' => 'Tên thể loại có độ dài từ 3-100',
 			]);
 		$theloai = new theloai;
-		$theloai->name = $request->name;
-		$theloai->save();
+		$theloai->add($request);
 		return redirect('admin/theloai/them')->with('thongbao', 'Thêm thành công');
 	}
 
@@ -51,8 +50,7 @@ class TheloaiController extends Controller {
 				'name.max' => 'Tên thể loại có độ dài từ 3-100',
 
 			]);
-		$theloai->name = $request->name;
-		$theloai->save();
+		$theloai->add($request);
 		return redirect('admin/theloai/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}
 	public function getxoa($id) {

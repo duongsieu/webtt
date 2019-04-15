@@ -57,7 +57,7 @@ Tel: (84) 934701601
             <li><a href="blog">blog</a></li>
             <li><a class="hidden-xs" href="#">|</a></li>
           </ul>
-          <p>(C) 2019, <span><a href="https://www.template.net/editable/websites/html5" target="_blank">Shopmoto</a></span>, Designed by <span><a href="https://www.template.net/editable/websites/html5" target="_blank">DuongSieu</a></span></p>
+          <p>(C) 2019, <span><a href="/" target="_blank">Shopmoto</a></span>, Designed by <span><a  target="_blank">DuongSieu</a></span></p>
         </div>
       </div>
     </div>

@@ -19,11 +19,7 @@ class dichvuController extends Controller {
 
 	public function postthem(Request $request) {
 		$dichvu = new dichvu;
-		$dichvu->tendv = $request->tendv;
-		$dichvu->tomtat = $request->tomtat;
-		$dichvu->noidung = $request->noidung;
-
-		$dichvu->save();
+		$dichvu->add($request);
 		return redirect('admin/dichvu/them')->with('thongbao', 'Thêm thành công');
 	}
 
@@ -34,10 +30,7 @@ class dichvuController extends Controller {
 
 	public function postSua(Request $request, $id) {
 		$dichvu = dichvu::find($id);
-		$dichvu->tendv = $request->tendv;
-		$dichvu->tomtat = $request->tomtat;
-		$dichvu->noidung = $request->noidung;
-		$dichvu->save();
+		$dichvu->add($request);
 		return redirect('admin/dichvu/sua/' . $id)->with('thongbao', 'Sửa thành công');
 	}
 	public function getxoa($id) {

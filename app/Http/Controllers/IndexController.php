@@ -55,13 +55,7 @@ class IndexController extends Controller {
 	public function postdathang(Request $request) {
 		$cart = Session::get('cart');
 		$bill = new hoadon;
-		$bill->id_user = Auth::user()->id;
-		$bill->ngay = date('Y-m-d');
-		$bill->tonghoadon = $cart->totalPrice;
-		$bill->note = $request->note;
-		$bill->status = 'Chưa giao hàng';
-		$bill->save();
-
+		$bill->add($request, $cart);
 		foreach ($cart->items as $key => $value) {
 			# code...
 			$bill_detail = new chitiethoadon;
@@ -70,6 +64,15 @@ class IndexController extends Controller {
 			$bill_detail->soluong = $value['qty'];
 			$bill_detail->id_product = $key;
 			$bill_detail->save();
+			$sanpham = sanpham::find($key);
+			$sanpham->name = $value['item']['name'];
+			$sanpham->price = $value['item']['price'];
+			$sanpham->amount = ($value['item']['amount'] - $value['qty']);
+			$sanpham->description = $value['item']['description'];
+			$sanpham->id_type = $value['item']['id_type'];
+			$sanpham->noibat = $value['item']['noibat'];
+
+			$sanpham->save();
 		}
 		$sanpham_cart = $cart->items;
 		// $tensp = $sanpham_cart['name'];
@@ -91,13 +94,19 @@ class IndexController extends Controller {
 	}
 	public function getAddtocart(Request $request, $id) {
 		if (Auth::check()) {
-			$sanpham = sanpham::find($id);
-			$oldcart = Session::has('cart') ? Session::get('cart') : null;
-			$cart = new cart($oldcart);
-			$cart->add($sanpham, $id);
+			if (Auth::user()->role == "khach") {
+				$sanpham = sanpham::find($id);
+				$oldcart = Session::has('cart') ? Session::get('cart') : null;
+				$cart = new cart($oldcart);
+				$cart->add($sanpham, $id);
 
-			$request->Session()->put('cart', $cart);
-			return redirect()->back();
+				$request->Session()->put('cart', $cart);
+				return view('cart');
+
+			} else {
+				Auth::logout();
+				return redirect('dangnhap')->with('thongbao4', 'Admin không thể mua hàng');
+			}
 		} else {
 			return redirect('dangnhap')->with('Thongbao2', 'Bạn phải đăng nhập để mua hàng');
 		}
@@ -109,11 +118,10 @@ class IndexController extends Controller {
 		$cart->removeItem($id);
 		if (count($cart->items) > 0) {
 
-			Session::put('cart', $cart);
+			Session()->put('cart', $cart);
 		} else {
 			Session::forget('cart');
 		}
-
 		return redirect()->back();
 
 	}
@@ -145,13 +153,7 @@ class IndexController extends Controller {
 
 			]);
 		$user = User::find(Auth::user()->id);
-		$user->name = $request->name;
-		$user->email = $request->email;
-		$user->sdt = $request->sdt;
-		$user->password = bcrypt($request->newpassword);
-		$user->role = "khach";
-		$user->diachi = $request->diachi;
-		$user->save();
+		$user->add($request);
 		return redirect()->back()->with('thongbao', 'Bạn đã cập nhật mật khẩu thành công');
 	}
 
